@@ -63,7 +63,7 @@ This portfolio is the technical side of my work: scripts, tools, and labs that s
 > ⚠️ This is a **first version** of the portfolio. Some projects are already in code privately and will be progressively documented and published.
 
 ### **1. Tenant-wide MFA rollout (Okta Workforce)**  
-**Goal:** Deploy strong authentication across the entire organization (~3,000+ users) with minimal friction and full business continuity.
+**Goal:** Deploy strong authentication across the entire organization (~4,000+ users) with minimal friction and full business continuity.
 
 **What I did:**
 - Designed and deployed **MFA enrollment flows** for all workforce users  
