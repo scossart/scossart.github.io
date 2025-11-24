@@ -62,98 +62,108 @@ This portfolio is the technical side of my work: scripts, tools, and labs that s
 
 > ⚠️ This is a **first version** of the portfolio. Some projects are already in code privately and will be progressively documented and published.
 
-### 1. Okta Group Rules & Manual Membership Audit
+### **1. Tenant-wide MFA rollout (Okta Workforce)**  
+**Goal:** Deploy strong authentication across the entire organization (~3,000+ users) with minimal friction and full business continuity.
 
-**Goal:** Detect users who were manually added to groups that are supposed to be fully driven by Group Rules.
+**What I did:**
+- Designed and deployed **MFA enrollment flows** for all workforce users  
+- Managed communication, onboarding plans and exception paths  
+- Implemented MFA policies based on:
+  - group membership  
+  - network zones  
+  - device trust  
+- Ensured compatibility with existing SSO apps and legacy authentication  
+- Provided support, troubleshooting and fine-tuning during rollout  
+- Reduced friction while maintaining strong security requirements  
 
-**What it does:**
+**Impact:** The company migrated from weak authentication to **full MFA coverage** across critical applications.
 
-- Retrieves Okta group rules and their conditions (attributes, group membership, etc.)
-- Builds the expected membership set for each rule-based group
-- Compares it with the actual group members
-- Detects:
-  - users present in the group but not matching the rule conditions
-  - potential inconsistencies between rules and real life
-- Exports results to Excel (XLSX) for IAM / security review
-
-**Tech stack:** Python, Okta REST API, JSON, Excel export.
-
-_Status:_ Already working in my environment; public version to be cleaned and pushed.
-
----
-
-### 2. Okta Group & Rule Renaming Automation
-
-**Goal:** Help rename groups and their associated rules safely and consistently at scale.
-
-**What it does:**
-
-- Reads Okta groups and their associated rules
-- Applies controlled rename patterns (e.g. replacing a specific keyword)
-- Updates:
-  - group names
-  - rule names
-  - rule conditions where needed (string replacements inside expressions)
-- Logs each change for review and rollback if necessary
-
-**Tech stack:** Python, Okta REST API, JSON deep copy / manipulation.
-
-_Status:_ Script already in use; being refactored for public release with sanitized examples.
+**Tech stack:** Okta policies, network zones, enrollment flows, user lifecycle coordination.
 
 ---
 
-### 3. Entra ID (Azure AD) Audit Scripts *(planned)*
+### **2. SSO & automatic provisioning for 100+ applications**
 
-**Goal:** Build a small toolkit to audit core Entra ID security configuration.
+**Goal:** Centralize authentication and automate user provisioning for a large application portfolio.
 
-Planned modules:
+**What I did:**
+- Integrated more than **100 internal and third-party applications** into Okta  
+- Implemented SSO using SAML 2.0, OIDC and WS-Fed depending on vendor capabilities  
+- Built provisioning workflows:
+  - SCIM 2.0  
+  - API-based provisioning  
+  - group-based assignments  
+- Collaborated with application owners to validate mappings, roles and lifecycle logic  
+- Ensured clean deprovisioning and access revocation  
+- Maintained documentation and onboarding procedures for new apps
 
-- MFA status report per user
-- Sign-in logs extraction and basic anomaly detection (locations, IP changes, failure spikes)
-- Inactive account detection based on sign-in and/or last password change
-- Export to CSV / Excel for follow-up actions
+**Impact:** Strong reduction in manual work, consistent access controls, faster onboarding and improved security across the application landscape.
+
+**Tech stack:** Okta SSO (SAML/OIDC), SCIM provisioning, API connectivity, attribute mapping.
+
+---
+
+### **3. Okta Group Rules: audit, cleanup & automation (Python)**
+
+**Goal:** Ensure consistency between **Okta Group Rules**, actual group memberships, and naming conventions.
+
+**What I built:**
+- Script to extract and analyze all Okta Group Rules (conditions, expressions, source groups)  
+- Logic to rebuild the **expected membership set** for each rule  
+- Comparison engine to detect:
+  - users manually added to rule-driven groups  
+  - inconsistent rule conditions  
+  - drift between rules and reality  
+- Automated cleanup options with Excel export for IAM teams  
+- Safe renaming system for groups & rules:
+  - controlled keyword replacements  
+  - expression updates inside rule conditions  
+  - full logging for rollbacks
+
+**Impact:** Improved rule reliability, reduced manual discrepancies, and created a foundation for future Identity-as-Code adoption.
+
+**Tech stack:** Python, Okta REST API, JSON deep-copy manipulation, Excel export.
+
+**Status:** Already running in production; public version being sanitized and refactored.
+
+---
+
+### **4. Entra ID (Azure AD) audit toolkit *(planned)***
+
+**Goal:** Provide automated visibility and reports on core Entra ID security posture.
+
+**Planned modules:**
+- MFA status report per user  
+- Sign-in logs extraction + anomaly detection (IP changes, geo shifts, failure bursts)  
+- Inactive accounts detection  
+- License audit and user lifecycle checks  
+- Export to CSV / Excel for review and actions
 
 **Tech stack:** Python or PowerShell, Microsoft Graph API.
 
-_Status:_ Design phase; will be built progressively and published module by module._
+**Status:** Design phase; modules will be published progressively.
 
 ---
 
-### 4. Identity-as-Code Lab *(planned)*
+### **5. Identity-as-Code (Okta & Entra) *(planned)***
 
-**Goal:** Prove that a small Okta / Entra configuration can be described, versioned and recreated from code.
+**Goal:** Demonstrate that identity configurations can be managed like code and fully reconstructed.
 
-Planned scope:
+**Planned scope:**
+- Minimal reproducible environment:
+  - core groups  
+  - MFA & sign-on policies  
+  - sample applications  
+- Versioned configuration using Terraform (or Python templates)  
+- Capable of:
+  - sandbox recreation  
+  - tracking configuration changes  
+  - reviewing diffs via pull requests  
+  - automated validation
 
-- A minimal set of:
-  - groups
-  - apps
-  - policies (MFA, sign-on)
-- Managed via Terraform or Python scripts
-- Ability to:
-  - recreate a sandbox
-  - track configuration changes over time
-  - review changes like code (pull requests, diffs)
+**Tech stack:** Terraform (if provider relevant), Python, Git.
 
-**Tech stack:** Terraform (if relevant provider), Python, Git.
-
-_Status:_ Early design. This will be one of my main focus areas going forward._
-
----
-
-## What I’m building next
-
-Short-term focus:
-
-- Clean and open-source my existing Okta automation scripts (audit, rename, consistency checks)
-- Build small but **realistic labs** for:
-  - CIAM security scenarios (brute force, account recovery flows)
-  - OAuth2 / OIDC flows with a demo app
-- Move toward a more **Identity-as-Code** approach:
-  - less manual click-ops
-  - more reproducible configurations
-
-As my professional experience grows (especially around CIAM), this portfolio will evolve to reflect more advanced architectures and real-world patterns.
+**Status:** Early research; target project for 2025.
 
 ---
 
