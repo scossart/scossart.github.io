@@ -1,5 +1,5 @@
 ---
-title: "Jean Michel – IAM & CIAM Engineer"
+title: "Samuel Cossart – IAM & CIAM Consultant"
 ---
 
 # Samuel Cossart – IAM & CIAM Consultant
